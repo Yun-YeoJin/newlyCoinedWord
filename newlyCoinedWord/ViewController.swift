@@ -3,6 +3,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var newlyWordDic: [String: String] = ["만반잘부": "만나서 잘 부탁해",
+                        "꾸안꾸": "꾸민듯 안꾸민듯",
+                        "낄끼빠빠": "낄 때 끼고 빠질 때 빠져라",
+                        "솔까말": "솔직히 까놓고 말해서"]
+    
     @IBOutlet weak var SearchBar: UITextField!
     @IBOutlet weak var SearchButton: UIButton!
     
@@ -16,11 +21,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        
         buttonDesign(firstButton, "만반잘부")
         buttonDesign(secondButton, "꾸안꾸")
-        buttonDesign(thirdButton, "낄낄빠빠")
+        buttonDesign(thirdButton, "낄끼빠빠")
         buttonDesign(fourthButton, "솔까말")
         
+        searchBarDesign()
         labelDesign()
         
     }
@@ -34,27 +41,52 @@ class ViewController: UIViewController {
         buttonNumber.layer.borderWidth = 2
         buttonNumber.layer.borderColor = UIColor.darkGray.cgColor
         buttonNumber.clipsToBounds = true
-        
-
 
 }
     
+    // 검색창 Design 설정
+    func searchBarDesign() {
+        SearchBar.placeholder = "신조어를 입력해주세요."
+        SearchBar.borderStyle = .bezel
+    }
+    
+    // 검색 결과창 Design 설정
     func labelDesign() {
         resultSearch.text = "신조어 검색 결과"
         resultSearch.font = UIFont.boldSystemFont(ofSize: 20)
         resultSearch.textColor = UIColor.blue
         resultSearch.textAlignment = .center
     }
-    //올라와있는 키보드 내리기
+    
+    func SearchWords() {
+        if SearchBar.text == "만반잘부" {
+            resultSearch.text = newlyWordDic["만반잘부"]
+        }   else if SearchBar.text == "솔까말"{
+            resultSearch.text = newlyWordDic["솔까말"]
+        } else if SearchBar.text == "꾸안꾸"{
+            resultSearch.text = newlyWordDic["꾸안꾸"]
+    }  else if SearchBar.text == "낄끼빠빠"{
+        resultSearch.text = newlyWordDic["낄끼빠빠"]
+    } else {
+        resultSearch.text = "신조어 사전에 없는 단어입니다!"
+        resultSearch.textColor = .red
+    }
+        
+    }
+    
+    // 올라와있는 키보드 내리기
     @IBAction func keyBoardDown(_ sender: Any) {
         view.endEditing(true)
     }
-    @IBAction func searchButtonClicked(_ sender: UIButton) {
-        resultSearch.text = SearchBar.text
-    }
     
+    // search버튼 클릭시
+    @IBAction func searchButtonClicked(_ sender: UIButton) {
+       SearchWords()
+    }
+   
+    // Did End on Exit로 설정 , return키 누르면 키보드 내려감.
     @IBAction func keyBoardDownForReturn(_ sender: UITextField) {
-        resultSearch.text = SearchBar.text
+        SearchWords()
     }
     
     
