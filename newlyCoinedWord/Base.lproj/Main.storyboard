@@ -141,6 +141,10 @@
                         <outlet property="resultSearch" destination="LIh-JR-4Wy" id="mKq-fz-rCx"/>
                         <outlet property="secondButton" destination="a3J-6k-WQv" id="pDe-U8-oNK"/>
                         <outlet property="thirdButton" destination="w2U-5W-iEW" id="4UK-I7-sf1"/>
+                        <outletCollection property="newlycoinedButtonCollection" destination="maC-FA-rhd" collectionClass="NSMutableArray" id="Vm6-ip-Ldg"/>
+                        <outletCollection property="newlycoinedButtonCollection" destination="a3J-6k-WQv" collectionClass="NSMutableArray" id="grv-Zj-s70"/>
+                        <outletCollection property="newlycoinedButtonCollection" destination="w2U-5W-iEW" collectionClass="NSMutableArray" id="Bk1-4h-6VJ"/>
+                        <outletCollection property="newlycoinedButtonCollection" destination="b0g-JM-ysE" collectionClass="NSMutableArray" id="FSe-5j-vdi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
