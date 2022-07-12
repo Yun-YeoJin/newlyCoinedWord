@@ -91,6 +91,13 @@ class ViewController: UIViewController {
     @IBAction func searchButtonClicked(_ sender: UIButton) {
         if !(SearchBar.text?.isEmpty)! {
             resultSearch.text = newlyWordDic[SearchBar.text!]
+            resultSearch.textColor = .blue
+        } else if !(SearchBar.text?.isEmpty)! && resultSearch.text != newlyWordDic[SearchBar.text!] {
+            resultSearch.text = "신조어 사전에 없는 단어입니다!"
+            resultSearch.textColor = .green
+        } else {
+            resultSearch.text = "신조어를 입력해주세요!"
+            resultSearch.textColor = .red
         }
         let coinedWord = newlyWordDic.keys.shuffled()
         for (button, word) in zip(newlycoinedButtonCollection, coinedWord) {
