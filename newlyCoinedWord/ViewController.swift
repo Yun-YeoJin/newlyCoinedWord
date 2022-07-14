@@ -35,9 +35,14 @@ class ViewController: UIViewController {
         buttonDesign(thirdButton, "낄끼빠빠")
         buttonDesign(fourthButton, "솔까말")
         
+//      newButtontitle(clickedbutton: newlycoinedButtonCollection, itemName: "만반잘부")
+//      newButtontitle(clickedbutton: newlycoinedButtonCollection, itemName: "솔까말")
+//      newButtontitle(clickedbutton: newlycoinedButtonCollection, itemName: "꾸안꾸")
+//      newButtontitle(clickedbutton: newlycoinedButtonCollection, itemName: "낄끼빠빠")
         searchBarDesign()
         labelDesign()
         
+   
     }
     
     //각 버튼 Design 함수 설정
@@ -49,8 +54,14 @@ class ViewController: UIViewController {
         buttonNumber.layer.borderWidth = 2
         buttonNumber.layer.borderColor = UIColor.darkGray.cgColor
         buttonNumber.clipsToBounds = true
-
 }
+    
+    func newButtontitle(clickedbutton: [UIButton], itemName: String) {
+        for i in 0...2{
+            clickedbutton[i].setTitle(clickedbutton[i+1].currentTitle, for: .normal)
+        }
+            clickedbutton[3].setTitle(itemName, for: .normal)
+    }
     
     // 검색창 Design 설정
     func searchBarDesign() {
@@ -66,26 +77,23 @@ class ViewController: UIViewController {
         resultSearch.textAlignment = .center
     }
     
-//    func SearchWords() {
-//        if SearchBar.text == "만반잘부" {
-//            resultSearch.text = newlyWordDic["만반잘부"]
-//        }   else if SearchBar.text == "솔까말"{
-//            resultSearch.text = newlyWordDic["솔까말"]
-//        } else if SearchBar.text == "꾸안꾸"{
-//            resultSearch.text = newlyWordDic["꾸안꾸"]
-//    }  else if SearchBar.text == "낄끼빠빠"{
-//        resultSearch.text = newlyWordDic["낄끼빠빠"]
-//    } else {
-//        resultSearch.text = "신조어 사전에 없는 단어입니다!"
-//        resultSearch.textColor = .red
-//    }
-//
-//    }
-    
+    func resulttext() {
+        for i in newlyWordDic {
+            if SearchBar.text == i.key {
+                resultSearch.text = i.value
+                for s in 1...i.value.count-3 {
+                    newlycoinedButtonCollection[s-1].setTitle(newlycoinedButtonCollection[s].currentTitle, for: .normal)
+                }
+                newlycoinedButtonCollection[3].setTitle(SearchBar.text, for: .normal)
+            }
+        }
+    }
+
     // 올라와있는 키보드 내리기
     @IBAction func keyBoardDown(_ sender: Any) {
         view.endEditing(true)
     }
+    
     
     // search버튼 클릭시
     @IBAction func searchButtonClicked(_ sender: UIButton) {
@@ -99,10 +107,12 @@ class ViewController: UIViewController {
             resultSearch.text = "신조어를 입력해주세요!"
             resultSearch.textColor = .red
         }
+
         let coinedWord = newlyWordDic.keys.shuffled()
         for (button, word) in zip(newlycoinedButtonCollection, coinedWord) {
             button.setTitle(word, for: .normal)
         }
+   
     }
    
     // Did End on Exit로 설정 , return키 누르면 키보드 내려감.
